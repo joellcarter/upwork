@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Mir Shahid Ali — Book Formatting Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  background:#f5f2eb;
+  color:#0d0d0b;
+  font-family:'Barlow',system-ui,sans-serif;
+  font-weight:300;
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+
+/* =====================================================
+   TOKENS
+===================================================== */
+:root{
+  --ink:#0d0d0b;
+  --cream:#f5f2eb;
+  --paper:#faf8f3;
+  --fog:#e8e3d8;
+  --red:#b83232;
+  --muted:#6e6758;
+  --rule:rgba(13,13,11,0.1);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Barlow',system-ui,sans-serif;
+  --cond:'Barlow Condensed',system-ui,sans-serif;
+  --max:1240px;
+}
+
+/* =====================================================
+   CSS-ONLY ENTRANCE ANIMATIONS
+   All elements visible by default; animation layers on top
+===================================================== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:none}
+}
+@keyframes fadeIn{
+  from{opacity:0}to{opacity:1}
+}
+@keyframes slideDown{
+  from{opacity:0;transform:translateY(-16px)}
+  to{opacity:1;transform:none}
+}
+@keyframes marqueeScroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+@keyframes floatBook{
+  0%,100%{transform:translateY(0) rotate(-1deg)}
+  50%{transform:translateY(-12px) rotate(-1deg)}
+}
+@keyframes pulse{
+  0%,100%{opacity:1}50%{opacity:0.4}
+}
+
+/* Utility animation classes */
+.anim-nav{animation:slideDown 0.7s 0.1s both}
+.anim-1{animation:fadeUp 0.8s 0.15s both}
+.anim-2{animation:fadeUp 0.8s 0.3s both}
+.anim-3{animation:fadeUp 0.8s 0.45s both}
+.anim-4{animation:fadeUp 0.8s 0.6s both}
+.anim-5{animation:fadeUp 0.8s 0.75s both}
+.anim-fade{animation:fadeIn 1s 0.2s both}
+
+/* =====================================================
+   LAYOUT
+===================================================== */
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 56px}
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--ink)}
+
+/* =====================================================
+   NAV
+===================================================== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  padding:22px 0;
+  transition:padding 0.4s,background 0.4s,border-color 0.4s,backdrop-filter 0.4s;
+  border-bottom:1px solid transparent;
+}
+.nav.stuck{
+  padding:14px 0;
+  background:rgba(245,242,235,0.92);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--rule);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{
+  font-family:var(--cond);
+  font-size:0.8rem;
+  font-weight:500;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+}
+.nav-logo b{color:var(--red);font-weight:600}
+.nav-links{display:flex;align-items:center;gap:40px}
+.nav-links a{
+  font-family:var(--cond);
+  font-size:0.72rem;
+  font-weight:400;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--muted);
+  position:relative;
+  transition:color 0.2s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;
+  width:0;height:1px;background:var(--red);
+  transition:width 0.3s;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  font-family:var(--cond);
+  font-size:0.72rem;
+  font-weight:500;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  background:var(--ink);
+  color:var(--paper);
+  padding:10px 24px;
+  display:inline-block;
+  transition:background 0.2s;
+}
+.nav-cta:hover{background:var(--red)}
+
+/* =====================================================
+   HERO
+===================================================== */
+.hero{
+  min-height:100vh;
+  background:var(--cream);
+  padding:80px 0 0;
+  display:flex;
+  flex-direction:column;
+}
+.hero-main{
+  flex:1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--rule);
+}
+.hero-left{
+  padding:60px 60px 80px 56px;
+  border-right:1px solid var(--rule);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.hero-eyebrow{
+  font-family:var(--cond);
+  font-size:0.68rem;
+  font-weight:500;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--red);
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:40px;
+}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--red)}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(3rem,5.5vw,5.8rem);
+  font-weight:900;
+  line-height:1.05;
+  letter-spacing:-0.025em;
+  margin-bottom:36px;
+}
+.hero-h1 em{
+  font-style:italic;
+  font-weight:400;
+  color:var(--red);
+  display:block;
+}
+.hero-sub{
+  font-family:var(--cond);
+  font-size:1rem;
+  font-weight:300;
+  letter-spacing:0.03em;
+  color:var(--muted);
+  line-height:1.6;
+  max-width:380px;
+  border-left:2px solid var(--fog);
+  padding-left:18px;
+  margin-bottom:52px;
+}
+.hero-btns{display:flex;align-items:center;gap:28px}
+.btn-solid{
+  font-family:var(--cond);
+  font-size:0.72rem;
+  font-weight:500;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  background:var(--ink);
+  color:var(--paper);
+  padding:13px 30px;
+  display:inline-block;
+  transition:background 0.2s;
+}
+.btn-solid:hover{background:var(--red)}
+.btn-text-link{
+  font-family:var(--cond);
+  font-size:0.72rem;
+  font-weight:400;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  transition:color 0.2s;
+}
+.btn-text-link:hover{color:var(--ink)}
+.btn-text-link .line{display:block;width:24px;height:1px;background:currentColor;transition:width 0.3s}
+.btn-text-link:hover .line{width:40px}
+
+/* Hero right */
+.hero-right{
+  padding:60px 0 80px 60px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.hero-bignum{
+  font-family:var(--serif);
+  font-size:clamp(7rem,16vw,16rem);
+  font-weight:900;
+  line-height:0.85;
+  color:var(--fog);
+  letter-spacing:-0.05em;
+  user-select:none;
+  pointer-events:none;
+}
+.hero-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border-top:1px solid var(--rule);
+  padding-top:28px;
+  margin-top:auto;
+}
+.hero-stat{padding-right:24px}
+.hero-stat+.hero-stat{border-left:1px solid var(--rule);padding-left:24px;padding-right:0}
+.stat-n{
+  font-family:var(--serif);
+  font-size:2.2rem;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:-0.02em;
+}
+.stat-n sup{font-size:1rem;vertical-align:super}
+.stat-l{
+  font-family:var(--cond);
+  font-size:0.65rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:5px;
+  line-height:1.4;
+}
+
+/* Marquee */
+.marquee{
+  background:var(--ink);
+  overflow:hidden;
+  padding:13px 0;
+  flex-shrink:0;
+}
+.marquee-track{
+  display:flex;
+  white-space:nowrap;
+  animation:marqueeScroll 30s linear infinite;
+}
+.marquee-item{
+  font-family:var(--cond);
+  font-size:0.65rem;
+  font-weight:500;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:rgba(245,242,235,0.55);
+  padding:0 44px;
+  flex-shrink:0;
+}
+.marquee-sep{color:var(--red);padding:0;margin:0 -22px}
+
+/* =====================================================
+   SECTION SCAFFOLDING
+===================================================== */
+.section{padding:100px 0}
+.section--dark{background:var(--ink);color:var(--paper)}
+.section--cream{background:var(--cream)}
+.section--fog{background:var(--fog)}
+.section--paper{background:var(--paper)}
+
+.s-index{
+  font-family:var(--cond);
+  font-size:0.63rem;
+  font-weight:500;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--red);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:20px;
+}
+.s-index::before{
+  content:attr(data-n);
+  font-family:var(--serif);
+  font-size:0.65rem;
+  color:var(--muted);
+  opacity:0.6;
+}
+.s-title{
+  font-family:var(--serif);
+  font-size:clamp(2rem,3.8vw,3.6rem);
+  font-weight:700;
+  line-height:1.1;
+  letter-spacing:-0.02em;
+}
+.s-title em{font-style:italic;font-weight:400}
+
+/* =====================================================
+   ABOUT
+===================================================== */
+.about-grid{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:0;
+  border-top:2px solid var(--ink);
+}
+.about-left{
+  padding:60px 48px 60px 0;
+  border-right:1px solid var(--rule);
+}
+.about-right{padding:60px 0 60px 56px}
+
+/* SVG portrait */
+.portrait-wrap{
+  width:100%;
+  aspect-ratio:3/4;
+  background:var(--fog);
+  position:relative;
+  overflow:hidden;
+  margin-bottom:24px;
+}
+.portrait-accent{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:4px;
+  background:var(--red);
+}
+
+.cred-list{display:flex;flex-direction:column}
+.cred-row{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  padding:14px 0;
+  border-bottom:1px solid var(--rule);
+}
+.cred-row:first-child{border-top:1px solid var(--rule)}
+.cred-num{
+  font-family:var(--serif);
+  font-size:1.6rem;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+  min-width:52px;
+  flex-shrink:0;
+}
+.cred-txt{
+  font-family:var(--sans);
+  font-size:0.875rem;
+  letter-spacing:0;
+  color:var(--muted);
+  line-height:1.55;
+}
+
+.manifesto-pull{
+  font-family:var(--serif);
+  font-size:clamp(1.4rem,2.4vw,2rem);
+  font-weight:400;
+  font-style:italic;
+  line-height:1.4;
+  letter-spacing:-0.01em;
+  margin-bottom:36px;
+  padding-bottom:36px;
+  border-bottom:1px solid var(--rule);
+}
+.manifesto-body{
+  columns:2;
+  column-gap:44px;
+  font-size:0.9375rem;
+  font-weight:300;
+  line-height:1.85;
+  color:var(--muted);
+}
+.manifesto-body p+p{margin-top:18px}
+
+.platform-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:32px;
+}
+.plat{
+  font-family:var(--sans);
+  font-size:0.8rem;
+  font-weight:400;
+  letter-spacing:0;
+  text-transform:none;
+  color:var(--muted);
+  border:1px solid var(--rule);
+  padding:5px 12px;
+  transition:border-color 0.2s,color 0.2s;
+}
+.plat:hover{border-color:var(--red);color:var(--ink)}
+
+/* =====================================================
+   SERVICES TABLE
+===================================================== */
+.svc-table{margin-top:48px}
+.svc-head{
+  display:grid;
+  grid-template-columns:52px 1fr 180px 180px 40px;
+  gap:0;
+  padding:12px 0;
+  border-bottom:2px solid var(--ink);
+}
+.svc-head span{
+  font-family:var(--cond);
+  font-size:0.6rem;
+  font-weight:500;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.svc-row{
+  display:grid;
+  grid-template-columns:52px 1fr 180px 180px 40px;
+  gap:0;
+  padding:28px 0;
+  border-bottom:1px solid var(--rule);
+  align-items:start;
+  transition:background 0.2s;
+  cursor:default;
+}
+.svc-row:hover{background:rgba(245,242,235,0.7)}
+.svc-row:hover .svc-arrow{transform:translateX(5px);color:var(--red)}
+.svc-n{
+  font-family:var(--serif);
+  font-size:0.8rem;
+  color:var(--muted);
+  padding-top:4px;
+  opacity:0.5;
+}
+.svc-name-main{
+  font-family:var(--serif);
+  font-size:1.35rem;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  line-height:1.1;
+}
+.svc-name-sub{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:0.95rem;
+  font-weight:400;
+  color:var(--muted);
+  margin-top:4px;
+}
+.svc-col{
+  font-family:var(--sans);
+  font-size:0.875rem;
+  letter-spacing:0;
+  color:var(--muted);
+  line-height:1.7;
+  padding-right:16px;
+}
+.svc-arrow{
+  font-size:1rem;
+  color:var(--muted);
+  transition:transform 0.25s,color 0.25s;
+  align-self:center;
+  text-align:right;
+}
+
+/* =====================================================
+   BEFORE / AFTER
+===================================================== */
+.ba-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;
+  margin-top:52px;
+}
+.ba-pane{
+  display:flex;
+  flex-direction:column;
+  min-height:520px;
+}
+.ba-label-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 24px;
+  background:rgba(255,255,255,0.04);
+}
+.ba-pane-title{
+  font-family:var(--cond);
+  font-size:0.65rem;
+  font-weight:500;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+}
+.ba-pane-subtitle{
+  font-family:var(--cond);
+  font-size:0.6rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  opacity:0.4;
+}
+/* BEFORE pane */
+.ba-before{background:#181510}
+.ba-before .ba-label-bar{border-bottom:1px solid rgba(255,255,255,0.06)}
+.ba-before .ba-pane-title{color:rgba(245,242,235,0.5)}
+.ms-content{
+  flex:1;
+  padding:28px;
+  font-family:'Courier New',monospace;
+  font-size:0.68rem;
+  line-height:1.9;
+  color:rgba(245,242,235,0.25);
+  white-space:pre-wrap;
+  word-break:break-word;
+  overflow:hidden;
+  position:relative;
+}
+/* Red wavy underline effect on before */
+.ms-content::after{
+  content:'';
+  position:absolute;
+  left:28px;right:28px;
+  height:100%;
+  top:0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent calc(1.9em * 3),
+      rgba(180,40,40,0.18) calc(1.9em * 3),
+      rgba(180,40,40,0.18) calc(1.9em * 3 + 1px)
+    );
+  pointer-events:none;
+}
+/* AFTER pane — real typeset book page */
+.ba-after{background:var(--paper)}
+.ba-after .ba-label-bar{
+  border-bottom:1px solid var(--rule);
+  background:transparent;
+}
+.ba-after .ba-pane-title{color:var(--red)}
+.ba-after .ba-pane-subtitle{color:var(--muted)}
+.book-page-inner{
+  flex:1;
+  padding:36px 44px;
+  display:flex;
+  flex-direction:column;
+}
+.bp-running-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom:14px;
+  margin-bottom:28px;
+  border-bottom:1px solid var(--fog);
+}
+.bp-rh-text{
+  font-family:var(--cond);
+  font-size:0.58rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.bp-rh-num{
+  font-family:var(--serif);
+  font-size:0.7rem;
+  color:var(--muted);
+}
+.bp-chapter-label{
+  font-family:var(--cond);
+  font-size:0.6rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:10px;
+}
+.bp-chapter-rule{width:40px;height:1px;background:var(--red);margin-bottom:18px}
+.bp-chapter-title{
+  font-family:var(--serif);
+  font-size:1.5rem;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  margin-bottom:20px;
+  line-height:1.2;
+}
+.bp-drop{
+  float:left;
+  font-family:var(--serif);
+  font-size:3.8rem;
+  font-weight:900;
+  line-height:0.8;
+  margin:6px 8px 0 0;
+  padding-bottom:4px;
+  color:var(--ink);
+}
+.bp-text{
+  font-family:'Georgia',serif;
+  font-size:0.84rem;
+  line-height:1.95;
+  color:#252218;
+  text-align:justify;
+  hyphens:auto;
+  margin-bottom:14px;
+}
+.bp-footer{
+  margin-top:auto;
+  padding-top:14px;
+  border-top:1px solid var(--fog);
+  display:flex;
+  justify-content:center;
+}
+.bp-footer-num{font-family:var(--serif);font-size:0.7rem;color:var(--muted)}
+
+/* Comparison rows */
+.ba-compare{display:flex;flex-direction:column;gap:2px;margin-top:2px}
+.ba-compare-row{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.bac-cell{
+  padding:14px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#111;
+}
+.bac-label{
+  font-family:var(--cond);
+  font-size:0.62rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:rgba(245,242,235,0.3);
+}
+.bac-status{
+  font-family:var(--cond);
+  font-size:0.6rem;
+  font-weight:500;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+}
+.bad{color:#e05050}.good{color:#4caf78}
+
+/* =====================================================
+   PORTFOLIO
+===================================================== */
+.port-note{
+  font-family:var(--cond);
+  font-size:0.82rem;
+  font-weight:300;
+  letter-spacing:0.03em;
+  color:var(--muted);
+  line-height:1.75;
+  max-width:480px;
+}
+.port-header{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:end;
+  padding-bottom:48px;
+  border-bottom:1px solid var(--rule);
+  margin-bottom:48px;
+}
+.port-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+.pi{
+  background:var(--paper);
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+  transition:box-shadow 0.3s;
+}
+.pi:hover{box-shadow:0 12px 48px rgba(13,13,11,0.15)}
+.pi:hover .pi-overlay{opacity:1}
+.pi:hover .pi-spine{transform:scaleY(1)}
+
+.pi-inner{
+  height:100%;
+  min-height:420px;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+}
+.pi-spine{
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:3px;
+  background:var(--red);
+  transform:scaleY(0);
+  transform-origin:bottom;
+  transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.pi-cover{
+  height:260px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.pi-info{
+  flex:1;
+  padding:20px 24px 24px;
+  border-top:1px solid var(--rule);
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  background:var(--paper);
+}
+.pi-genre{
+  font-family:var(--cond);
+  font-size:0.58rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+.pi-title{
+  font-family:var(--serif);
+  font-size:1rem;
+  font-weight:700;
+  line-height:1.2;
+  letter-spacing:-0.01em;
+}
+.pi-title em{font-style:italic;font-weight:400}
+.pi-detail{
+  font-family:var(--cond);
+  font-size:0.65rem;
+  letter-spacing:0.05em;
+  color:var(--muted);
+  margin-top:4px;
+}
+.pi-overlay{
+  position:absolute;inset:0;
+  background:rgba(13,13,11,0.90);
+  opacity:0;
+  transition:opacity 0.3s;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:24px;
+}
+.pi-ov-title{
+  font-family:var(--serif);
+  font-size:0.95rem;
+  font-weight:700;
+  color:var(--paper);
+  margin-bottom:6px;
+}
+.pi-ov-desc{
+  font-family:var(--cond);
+  font-size:0.72rem;
+  letter-spacing:0.03em;
+  color:rgba(245,242,235,0.55);
+  line-height:1.55;
+  margin-bottom:14px;
+}
+.pi-ov-tags{display:flex;flex-wrap:wrap;gap:6px}
+.pi-tag{
+  font-family:var(--cond);
+  font-size:0.58rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--red);
+  border:1px solid rgba(184,50,50,0.35);
+  padding:2px 8px;
+}
+.pi-open-hint{
+  position:absolute;
+  top:16px;right:16px;
+  font-family:var(--cond);
+  font-size:0.58rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:rgba(245,242,235,0.35);
+  border:1px solid rgba(245,242,235,0.15);
+  padding:3px 8px;
+}
+
+/* =====================================================
+   MODALS
+===================================================== */
+.modal-bg{
+  position:fixed;inset:0;
+  background:rgba(13,13,11,0.88);
+  z-index:2000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.3s;
+}
+.modal-bg.open{opacity:1;pointer-events:all}
+.modal{
+  background:var(--paper);
+  max-width:800px;
+  width:100%;
+  max-height:88vh;
+  overflow-y:auto;
+  display:grid;
+  grid-template-columns:260px 1fr;
+  transform:translateY(20px);
+  transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  position:relative;
+}
+.modal-bg.open .modal{transform:none}
+.modal-left{padding:48px 36px;display:flex;align-items:center;justify-content:center;background:var(--fog)}
+.modal-right{padding:48px 40px}
+.modal-close-btn{
+  position:absolute;top:20px;right:20px;
+  background:none;border:1px solid rgba(13,13,11,0.15);
+  font-family:var(--cond);font-size:0.65rem;
+  letter-spacing:0.12em;text-transform:uppercase;
+  padding:6px 14px;cursor:pointer;
+  transition:border-color 0.2s,color 0.2s;
+  color:var(--muted);
+}
+.modal-close-btn:hover{border-color:var(--red);color:var(--red)}
+.modal-genre{
+  font-family:var(--cond);font-size:0.62rem;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--red);margin-bottom:12px;
+}
+.modal-title{
+  font-family:var(--serif);font-size:1.7rem;
+  font-weight:700;line-height:1.1;
+  letter-spacing:-0.02em;margin-bottom:6px;
+}
+.modal-subtitle{
+  font-family:var(--serif);font-style:italic;
+  font-size:1rem;color:var(--muted);margin-bottom:24px;
+}
+.modal-hr{height:1px;background:var(--rule);margin:20px 0}
+.modal-desc{
+  font-size:0.9rem;font-weight:300;
+  line-height:1.8;color:var(--muted);
+  margin-bottom:24px;
+}
+.modal-specs{display:flex;flex-direction:column}
+.modal-spec{
+  display:flex;align-items:baseline;
+  justify-content:space-between;
+  padding:9px 0;
+  border-bottom:1px solid var(--rule);
+  font-family:var(--cond);font-size:0.72rem;
+}
+.ms-key{letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.ms-val{font-weight:500;color:var(--ink)}
+
+/* =====================================================
+   PROCESS
+===================================================== */
+.process-layout{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:0;
+  border-top:1px solid var(--rule);
+  margin-top:52px;
+}
+.process-side{
+  padding:52px 40px 52px 0;
+  border-right:1px solid var(--rule);
+  display:flex;
+  align-items:flex-start;
+}
+.process-side-label{
+  font-family:var(--serif);
+  font-size:0.85rem;
+  font-style:italic;
+  font-weight:400;
+  color:var(--muted);
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  letter-spacing:0.06em;
+}
+.process-list{padding-left:52px}
+.ps{
+  display:grid;
+  grid-template-columns:56px 1fr;
+  padding:48px 0;
+  border-bottom:1px solid var(--rule);
+  gap:0;
+}
+.ps:last-child{border-bottom:none}
+.ps-num{
+  font-family:var(--serif);
+  font-size:2.8rem;
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-0.04em;
+  color:var(--fog);
+}
+.ps-body{padding-left:28px}
+.ps-title{
+  font-family:var(--serif);
+  font-size:1.3rem;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  margin-bottom:10px;
+}
+.ps-desc{
+  font-size:0.9375rem;
+  font-weight:300;
+  line-height:1.8;
+  color:var(--muted);
+  max-width:460px;
+  margin-bottom:16px;
+}
+.ps-chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  font-family:var(--cond);
+  font-size:0.62rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+  border:1px solid var(--rule);
+  padding:3px 10px;
+}
+
+/* =====================================================
+   CONTACT — 3-STEP QUALIFIER
+===================================================== */
+.contact-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+}
+.contact-left{
+  padding-right:72px;
+  border-right:1px solid rgba(255,255,255,0.07);
+}
+.contact-right{padding-left:72px}
+.contact-h{
+  font-family:var(--serif);
+  font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:700;
+  line-height:1.1;
+  letter-spacing:-0.02em;
+  color:var(--cream);
+  margin-bottom:20px;
+}
+.contact-h em{font-style:italic;font-weight:400;color:rgba(184,50,50,0.85)}
+.contact-body{
+  font-size:0.9375rem;
+  font-weight:300;
+  line-height:1.8;
+  color:rgba(245,242,235,0.45);
+  margin-bottom:44px;
+}
+.contact-facts{display:flex;flex-direction:column}
+.cf-item{
+  padding:16px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.cf-label{
+  font-family:var(--cond);
+  font-size:0.58rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:rgba(245,242,235,0.28);
+  margin-bottom:4px;
+}
+.cf-val{
+  font-family:var(--cond);
+  font-size:0.85rem;
+  letter-spacing:0.04em;
+  color:var(--cream);
+}
+
+/* Form */
+.form-prog{display:flex;gap:3px;margin-bottom:36px}
+.fp{height:2px;flex:1;background:rgba(255,255,255,0.1);transition:background 0.3s}
+.fp.done{background:var(--red)}.fp.active{background:var(--cream)}
+
+.f-step{display:none}
+.f-step.on{display:block}
+
+.f-step-lbl{
+  font-family:var(--cond);font-size:0.6rem;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(245,242,235,0.3);margin-bottom:6px;
+}
+.f-step-q{
+  font-family:var(--serif);font-size:1.35rem;
+  font-weight:700;color:var(--cream);
+  margin-bottom:28px;line-height:1.25;
+}
+
+.f-options{display:flex;flex-direction:column;gap:6px;margin-bottom:32px}
+.f-opt{
+  display:flex;align-items:center;gap:14px;
+  padding:13px 16px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:transparent;
+  width:100%;text-align:left;cursor:pointer;
+  transition:border-color 0.2s,background 0.2s;
+  font-family:var(--cond);
+}
+.f-opt:hover{border-color:rgba(184,50,50,0.4);background:rgba(184,50,50,0.05)}
+.f-opt.sel{border-color:var(--red);background:rgba(184,50,50,0.07)}
+.f-dot{
+  width:13px;height:13px;border-radius:50%;
+  border:1px solid rgba(255,255,255,0.2);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  transition:border-color 0.2s,background 0.2s;
+}
+.f-opt.sel .f-dot{border-color:var(--red);background:var(--red)}
+.f-opt.sel .f-dot::after{content:'';width:4px;height:4px;border-radius:50%;background:#fff}
+.f-opt-text{font-size:0.82rem;letter-spacing:0.03em;color:rgba(245,242,235,0.78)}
+
+.f-field{margin-bottom:16px}
+.f-field label{
+  display:block;
+  font-family:var(--cond);font-size:0.6rem;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(245,242,235,0.35);margin-bottom:8px;
+}
+.f-field input,.f-field textarea{
+  width:100%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);
+  padding:12px 14px;
+  font-family:var(--sans);font-size:0.875rem;font-weight:300;
+  color:var(--cream);outline:none;
+  transition:border-color 0.2s;resize:none;
+}
+.f-field input:focus,.f-field textarea:focus{border-color:rgba(184,50,50,0.5)}
+.f-field textarea{min-height:80px}
+
+.f-actions{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.f-next{
+  font-family:var(--cond);font-size:0.7rem;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  background:var(--red);color:#fff;border:none;
+  padding:12px 28px;cursor:pointer;transition:background 0.2s;
+}
+.f-next:hover{background:#9a2828}
+.f-back{
+  font-family:var(--cond);font-size:0.65rem;letter-spacing:0.12em;
+  text-transform:uppercase;color:rgba(245,242,235,0.28);
+  background:none;border:none;cursor:pointer;padding:0;
+  transition:color 0.2s;
+}
+.f-back:hover{color:var(--cream)}
+
+.f-success{display:none;padding:48px 0;text-align:center}
+.f-success.show{display:block}
+.fs-mark{
+  font-family:var(--serif);font-size:2.5rem;
+  font-weight:700;color:var(--red);margin-bottom:20px;
+}
+.fs-title{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--cream);margin-bottom:10px}
+.fs-sub{font-family:var(--cond);font-size:0.8rem;letter-spacing:0.06em;color:rgba(245,242,235,0.4)}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+.footer{
+  background:var(--ink);
+  border-top:1px solid rgba(255,255,255,0.05);
+  padding:36px 0;
+}
+.footer-inner{
+  display:flex;align-items:center;justify-content:space-between;
+}
+.f-logo{
+  font-family:var(--cond);font-size:0.72rem;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(245,242,235,0.35);
+}
+.f-logo b{color:var(--red)}
+.f-nav{display:flex;gap:28px}
+.f-nav a{
+  font-family:var(--cond);font-size:0.62rem;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(245,242,235,0.25);transition:color 0.2s;
+}
+.f-nav a:hover{color:rgba(245,242,235,0.6)}
+.f-copy{
+  font-family:var(--cond);font-size:0.6rem;
+  letter-spacing:0.1em;color:rgba(245,242,235,0.18);
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+@media(max-width:1024px){
+  .wrap{padding:0 32px}
+  .hero-main{grid-template-columns:1fr}
+  .hero-left{border-right:none;padding-right:0;padding-bottom:40px}
+  .hero-right{padding:0 0 60px}
+  .about-grid{grid-template-columns:1fr}
+  .about-left{border-right:none;padding-right:0;padding-bottom:40px}
+  .about-right{padding-left:0}
+  .manifesto-body{columns:1}
+  .contact-layout{grid-template-columns:1fr}
+  .contact-left{padding-right:0;border-right:none;padding-bottom:48px}
+  .contact-right{padding-left:0}
+  .pi.a{grid-column:span 6;grid-row:span 1}
+  .pi.c{grid-column:span 6}
+  .pi.b{grid-column:span 6}
+  .pi.d{grid-column:span 12}
+  .pi.e{grid-column:span 6}
+  .modal{grid-template-columns:1fr}
+  .modal-left{display:none}
+  .svc-head,.svc-row{grid-template-columns:40px 1fr 40px}
+  .svc-col{display:none}
+}
+@media(max-width:768px){
+  .wrap{padding:0 20px}
+  .section{padding:72px 0}
+  .nav-links{display:none}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .hero-stat:nth-child(3){grid-column:span 2;border-left:none;border-top:1px solid var(--rule);padding-left:0;padding-top:14px;margin-top:8px}
+  .ba-wrap{grid-template-columns:1fr;gap:2px}
+  .ba-pane{min-height:280px}
+  .pi.a,.pi.b,.pi.c,.pi.d,.pi.e{grid-column:span 12;grid-row:span 1}
+  .process-layout{grid-template-columns:1fr}
+  .process-side{display:none}
+  .process-list{padding-left:0}
+  .port-header{grid-template-columns:1fr;gap:24px}
+  .f-nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav anim-nav" id="nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <div class="nav-logo">Mir Shahid <b>Ali</b></div>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Send Manuscript</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-main">
+    <div class="wrap" style="display:contents">
+
+      <div class="hero-left">
+        <div>
+          <div class="hero-eyebrow anim-1">Book Formatting Specialist &mdash; Upwork Top Rated</div>
+          <h1 class="hero-h1 anim-2">
+            Your words,<br>
+            <em>perfectly</em><br>
+            set in type.
+          </h1>
+          <p class="hero-sub anim-3">
+            Professional Kindle, KDP, EPUB &amp; print interior
+            formatting for authors who understand that presentation
+            is part of the craft.
+          </p>
+          <div class="hero-btns anim-4">
+            <a href="#contact" class="btn-solid">Get Free Sample</a>
+            <a href="#portfolio" class="btn-text-link">See formatted work <span class="line"></span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-bignum anim-1">500<span style="font-size:0.45em;color:var(--red);vertical-align:super;font-weight:900">+</span></div>
+        <div class="hero-stats anim-3">
+          <div class="hero-stat">
+            <div class="stat-n">500<sup style="font-size:1rem;color:var(--red)">+</sup></div>
+            <div class="stat-l">Books<br>Formatted</div>
+          </div>
+          <div class="hero-stat">
+            <div class="stat-n">100<sup style="font-size:0.9rem">%</sup></div>
+            <div class="stat-l">KDP<br>Approval Rate</div>
+          </div>
+          <div class="hero-stat">
+            <div class="stat-n">48<span style="font-family:var(--cond);font-size:1.1rem;font-weight:300">hr</span></div>
+            <div class="stat-l">Max<br>Turnaround</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Marquee strip -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="marquee-item">Amazon KDP</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">Kindle EPUB</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">IngramSpark</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">Apple Books</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">Print-Ready PDF</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">EPUB3 Validated</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">Unlimited Revisions</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">48hr Delivery</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">Amazon KDP</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">Kindle EPUB</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">IngramSpark</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">Apple Books</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">Print-Ready PDF</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">EPUB3 Validated</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">Unlimited Revisions</span><span class="marquee-sep">&middot;</span>
+      <span class="marquee-item">48hr Delivery</span><span class="marquee-sep">&middot;</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section section--cream" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="s-index" data-n="01">About</div>
+        <div class="portrait-wrap">
+          <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+            <defs>
+              <linearGradient id="bg-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#cfc4ae"/>
+                <stop offset="100%" stop-color="#a8997e"/>
+              </linearGradient>
+            </defs>
+            <rect width="300" height="400" fill="url(#bg-grad)"/>
+            <!-- desk -->
+            <rect x="0" y="320" width="300" height="80" fill="#3a2c1e"/>
+            <!-- body -->
+            <rect x="80" y="190" width="140" height="145" rx="6" fill="#4a3626"/>
+            <!-- head -->
+            <ellipse cx="150" cy="162" rx="44" ry="50" fill="#5a4232"/>
+            <!-- collar/shirt detail -->
+            <polygon points="128,210 150,240 172,210" fill="#6a5040"/>
+            <!-- light on face -->
+            <ellipse cx="136" cy="148" rx="14" ry="16" fill="#7a6050" opacity="0.35"/>
+            <!-- bookshelves in background -->
+            <rect x="10" y="90" width="40" height="200" fill="#2e2218" opacity="0.4"/>
+            <rect x="14" y="100" width="6" height="60" fill="#8a6848" opacity="0.7"/>
+            <rect x="22" y="108" width="5" height="52" fill="#7a5838" opacity="0.7"/>
+            <rect x="29" y="96" width="8" height="64" fill="#9a7858" opacity="0.6"/>
+            <rect x="39" y="103" width="6" height="57" fill="#8a6840" opacity="0.6"/>
+            <!-- desk items: book -->
+            <rect x="60" y="305" width="72" height="9" rx="1" fill="#b83232" opacity="0.85"/>
+            <rect x="64" y="297" width="64" height="10" rx="1" fill="#8a2020"/>
+            <!-- name plate -->
+            <rect x="96" y="335" width="108" height="22" rx="2" fill="#2a1c10"/>
+            <text x="150" y="350" font-family="Georgia,serif" font-size="7.5" fill="#c8b898" text-anchor="middle" letter-spacing="1.5">MIR SHAHID ALI</text>
+          </svg>
+          <div class="portrait-accent"></div>
+        </div>
+        <div class="cred-list">
+          <div class="cred-row">
+            <div class="cred-num">7+</div>
+            <div class="cred-txt">Years specialising in<br>book formatting &amp; typesetting</div>
+          </div>
+          <div class="cred-row">
+            <div class="cred-num">500+</div>
+            <div class="cred-txt">Books formatted across<br>fiction, nonfiction &amp; specialty genres</div>
+          </div>
+          <div class="cred-row">
+            <div class="cred-num" style="font-size:1rem;line-height:1.4;color:var(--red)">Top<br>Rated</div>
+            <div class="cred-txt">Upwork Top Rated badge<br>with 5-star client history</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="s-index" data-n="">&nbsp;</div>
+        <h2 class="s-title" style="margin-bottom:32px">A book that reads <em>beautifully</em> sells better.</h2>
+        <div class="manifesto-pull">"The difference between a manuscript and a book is not content. It's craft — the invisible architecture that makes a reader forget they're reading."</div>
+        <div class="manifesto-body">
+          <p>I'm Mir Shahid Ali, a book formatting specialist working with self-publishing authors and publishers worldwide. My work lives at the intersection of traditional typography and the technical requirements of modern platforms.</p>
+          <p>Every book I format is treated as what it actually is: a designed object. Margins are not defaults. Typefaces are chosen with intention. Chapter openings are crafted. Drop caps earn their place. Running heads are consistent. The result is a reading experience that doesn't draw attention to itself.</p>
+          <p>I work across Kindle Direct Publishing, IngramSpark, Apple Books, Kobo, and Barnes &amp; Noble. My files don't generate KDP errors. They don't need corrections after upload. They look like books — not like Word documents renamed as PDFs.</p>
+          <p>The reader simply reads. That invisibility is the craft.</p>
+        </div>
+        <div class="platform-list">
+          <span class="plat">Amazon KDP</span>
+          <span class="plat">IngramSpark</span>
+          <span class="plat">Apple Books</span>
+          <span class="plat">Kobo</span>
+          <span class="plat">Barnes &amp; Noble</span>
+          <span class="plat">Draft2Digital</span>
+          <span class="plat">Smashwords</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section section--paper" id="services">
+  <div class="wrap">
+    <div class="s-index" data-n="02">Services</div>
+    <h2 class="s-title">What I do, <em>precisely</em></h2>
+    <div class="svc-table">
+      <div class="svc-head">
+        <span>#</span><span>Service</span>
+        <span>Deliverables</span><span>Platforms</span><span></span>
+      </div>
+      <div class="svc-row">
+        <div class="svc-n">01</div>
+        <div><div class="svc-name-main">Kindle Ebook Formatting</div><div class="svc-name-sub">EPUB / MOBI / KFX</div></div>
+        <div class="svc-col">Reflowable EPUB3<br>Clickable TOC<br>Kindle Previewer tested<br>KDP-ready file</div>
+        <div class="svc-col">Amazon KDP<br>Kindle Unlimited</div>
+        <div class="svc-arrow">&#8594;</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-n">02</div>
+        <div><div class="svc-name-main">Print Interior Layout</div><div class="svc-name-sub">Paperback &amp; Hardcover PDF</div></div>
+        <div class="svc-col">Print-ready PDF<br>Bleed, trim &amp; gutter<br>Drop caps, running heads<br>InDesign source file</div>
+        <div class="svc-col">Amazon KDP<br>IngramSpark<br>Lulu, B&amp;N</div>
+        <div class="svc-arrow">&#8594;</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-n">03</div>
+        <div><div class="svc-name-main">EPUB3 Distribution</div><div class="svc-name-sub">Multi-retailer ebook package</div></div>
+        <div class="svc-col">Validated EPUB3<br>Embedded fonts &amp; CSS<br>Accessibility markup<br>Metadata optimised</div>
+        <div class="svc-col">Apple Books<br>Kobo, B&amp;N Nook<br>Draft2Digital</div>
+        <div class="svc-arrow">&#8594;</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-n">04</div>
+        <div><div class="svc-name-main">Manuscript Assessment</div><div class="svc-name-sub">Pre-formatting review</div></div>
+        <div class="svc-col">Structure review<br>Style sheet creation<br>Platform brief</div>
+        <div class="svc-col">Any platform<br>Any genre</div>
+        <div class="svc-arrow">&#8594;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="section section--dark" id="comparison">
+  <div class="wrap">
+    <div class="s-index" data-n="03" style="color:rgba(184,50,50,0.85)">Before &amp; After</div>
+    <h2 class="s-title" style="color:var(--cream)">The transformation <em>is the work</em></h2>
+    <div class="ba-wrap">
+      <!-- BEFORE -->
+      <div class="ba-pane ba-before">
+        <div class="ba-label-bar">
+          <span class="ba-pane-title">Raw Manuscript</span>
+          <span class="ba-pane-subtitle">Unformatted Word Document</span>
+        </div>
+        <div class="ms-content">Chapter 1
+
+it was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness,
+
+   the man walked into the room (see chapter 3 for description—author forgot) and said something meaningful or possibly just moved plot along—unclear at this draft stage—
+
+AUTHOR NOTE: fix this later
+
+The woman replied. She said words. Important words. Words that meant things.
+
+(NEEDS RESEARCH)
+
+He nodded. She nodded. They both stood there nodding at each other like two broken toys.
+
+---BEGIN CHAPTER 2 EVEN THOUGH CH1 ISNT DONE---
+</div>
+      </div>
+
+      <!-- AFTER -->
+      <div class="ba-pane ba-after">
+        <div class="ba-label-bar">
+          <span class="ba-pane-title">Formatted Book Interior</span>
+          <span class="ba-pane-subtitle">KDP-Ready Print PDF</span>
+        </div>
+        <div class="book-page-inner">
+          <div class="bp-running-head">
+            <span class="bp-rh-text">A Tale of Two Cities</span>
+            <span class="bp-rh-num">1</span>
+          </div>
+          <div class="bp-chapter-label">Chapter One</div>
+          <div class="bp-chapter-rule"></div>
+          <div class="bp-chapter-title">The Best of Times</div>
+          <p class="bp-text">
+            <span class="bp-drop">I</span>t was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness.
+          </p>
+          <p class="bp-text">It was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way.</p>
+          <p class="bp-text">In short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only.</p>
+          <div class="bp-footer"><div class="bp-footer-num">&mdash; 1 &mdash;</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ba-compare">
+      <div class="ba-compare-row">
+        <div class="bac-cell"><span class="bac-label">No consistent margins</span><span class="bac-status bad">Issue</span></div>
+        <div class="bac-cell"><span class="bac-label">Typeset margins &amp; gutters</span><span class="bac-status good">Resolved</span></div>
+      </div>
+      <div class="ba-compare-row">
+        <div class="bac-cell"><span class="bac-label">No chapter structure</span><span class="bac-status bad">Issue</span></div>
+        <div class="bac-cell"><span class="bac-label">Styled chapter openings with rule</span><span class="bac-status good">Resolved</span></div>
+      </div>
+      <div class="ba-compare-row">
+        <div class="bac-cell"><span class="bac-label">No running heads or folios</span><span class="bac-status bad">Issue</span></div>
+        <div class="bac-cell"><span class="bac-label">Running heads &amp; page numbers</span><span class="bac-status good">Resolved</span></div>
+      </div>
+      <div class="ba-compare-row">
+        <div class="bac-cell"><span class="bac-label">Inconsistent paragraph spacing</span><span class="bac-status bad">Issue</span></div>
+        <div class="bac-cell"><span class="bac-label">Drop cap, justified text, leading</span><span class="bac-status good">Resolved</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section section--cream" id="portfolio">
+  <div class="wrap">
+    <div class="port-header">
+      <div>
+        <div class="s-index" data-n="04">Portfolio</div>
+        <h2 class="s-title">Selected formatted <em>works</em></h2>
+      </div>
+      <p class="port-note">A selection of recent formatting projects across fiction, nonfiction, and specialty genres. Each currently live on Amazon KDP or distributed via IngramSpark. Click any title to view full project details.</p>
+    </div>
+
+    <div class="port-grid">
+
+      <!-- 1: Large -->
+      <div class="pi" onclick="openModal('m1')">
+        <div class="pi-inner">
+          <div class="pi-spine"></div>
+          <div class="pi-cover" style="background:#1a1410">
+  <svg viewBox="0 0 140 200" style="width:110px" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="140" height="200" fill="#1a1410"/>
+              <rect x="0" y="0" width="140" height="3" fill="#b83232"/>
+              <text x="14" y="60" font-family="Georgia" font-size="11" fill="#e8d5a0" font-style="italic">The Silent</text>
+              <text x="14" y="78" font-family="Georgia" font-size="11" fill="#e8d5a0" font-style="italic">Garden</text>
+              <line x1="14" y1="90" x2="76" y2="90" stroke="#b83232" stroke-width="1"/>
+              <text x="14" y="104" font-family="Georgia" font-size="5.5" fill="rgba(232,213,160,0.45)" letter-spacing="2">A NOVEL</text>
+              <rect x="14" y="175" width="112" height="0.75" fill="rgba(232,213,160,0.15)"/>
+              <text x="14" y="188" font-family="Georgia" font-size="4.5" fill="rgba(232,213,160,0.3)" letter-spacing="1.5">FORMATTED BY MIR SHAHID ALI</text>
+            </svg>
+          </div>
+          <div class="pi-genre">Literary Fiction</div>
+          <div class="pi-title">The Silent <em>Garden</em></div>
+          <div class="pi-detail">Print + Kindle &mdash; 342 pages &mdash; KDP</div>
+        </div>
+        <div class="pi-overlay">
+          <div class="pi-open-hint">View details</div>
+          <div class="pi-ov-title">The Silent Garden</div>
+          <div class="pi-ov-desc">Literary fiction, 342pp. Full print interior with drop caps, custom chapter openings, running heads. Companion EPUB for Kindle.</div>
+          <div class="pi-ov-tags"><span class="pi-tag">Print PDF</span><span class="pi-tag">EPUB</span><span class="pi-tag">Drop Caps</span><span class="pi-tag">KDP Live</span></div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="pi" onclick="openModal('m2')">
+        <div class="pi-inner">
+          <div class="pi-spine"></div>
+          <div class="pi-cover" style="background:#2c3e50">
+  <svg viewBox="0 0 140 160" style="width:120px" fill="none">
+    <rect width="140" height="160" fill="#2c3e50"/>
+              <text x="14" y="38" font-family="Georgia" font-size="12" fill="#ecf0f1" font-weight="bold">SCALING</text>
+              <text x="14" y="56" font-family="Georgia" font-size="12" fill="#ecf0f1" font-weight="bold">BEYOND</text>
+              <text x="14" y="74" font-family="Georgia" font-size="12" fill="#b83232" font-style="italic">Seven Figures</text>
+              <line x1="14" y1="84" x2="80" y2="84" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+              <text x="14" y="97" font-family="Georgia" font-size="5.5" fill="rgba(255,255,255,0.35)" letter-spacing="1.5">BUSINESS &amp; ENTREPRENEURSHIP</text>
+            </svg>
+          </div>
+          <div class="pi-genre">Business Nonfiction</div>
+          <div class="pi-title">Scaling <em>Beyond Seven Figures</em></div>
+          <div class="pi-detail">Kindle + Paperback &mdash; 218 pages</div>
+        </div>
+        <div class="pi-overlay">
+          <div class="pi-open-hint">View details</div>
+          <div class="pi-ov-title">Scaling Beyond Seven Figures</div>
+          <div class="pi-ov-desc">Business nonfiction with tables, callout boxes, and custom headers. Both Kindle and print formatted simultaneously.</div>
+          <div class="pi-ov-tags"><span class="pi-tag">Complex Layout</span><span class="pi-tag">Tables</span><span class="pi-tag">KDP</span></div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="pi" onclick="openModal('m3')">
+        <div class="pi-inner">
+          <div class="pi-spine"></div>
+          <div class="pi-cover" style="background:#0d1117">
+  <svg viewBox="0 0 120 200" style="width:90px" fill="none">
+    <rect width="120" height="200" fill="#0d1117"/>
+              <circle cx="60" cy="80" r="42" fill="none" stroke="#b83232" stroke-width="0.5" opacity="0.5"/>
+              <circle cx="60" cy="80" r="26" fill="none" stroke="#b83232" stroke-width="0.5" opacity="0.3"/>
+              <text x="60" y="138" font-family="Georgia" font-size="9" fill="#c0c0c0" text-anchor="middle">DARK ORBIT</text>
+              <text x="60" y="152" font-family="Georgia" font-size="5.5" fill="rgba(192,192,192,0.35)" text-anchor="middle" letter-spacing="1">SCI-FI · BOOK 1 OF 3</text>
+            </svg>
+          </div>
+          <div class="pi-genre">Science Fiction Series</div>
+<div class="pi-title">Dark <em>Orbit</em></div>
+<div class="pi-detail">Series formatting &mdash; 3 volumes</div>
+        </div>
+        <div class="pi-overlay">
+          <div class="pi-open-hint">View details</div>
+          <div class="pi-ov-title">Dark Orbit (Series)</div>
+          <div class="pi-ov-desc">Three-volume sci-fi series. Unified typographic identity across all books with master style sheet.</div>
+          <div class="pi-ov-tags"><span class="pi-tag">Series</span><span class="pi-tag">EPUB3</span><span class="pi-tag">Print</span></div>
+        </div>
+      </div>
+
+      <!-- 4: Wide -->
+      <div class="pi" onclick="openModal('m4')">
+        <div class="pi-inner">
+  <div class="pi-spine"></div>
+  <div class="pi-cover" style="background:#f5f0e8">
+    <svg viewBox="0 0 100 160" style="width:80px;flex-shrink:0" fill="none">
+      <rect width="100" height="160" fill="#f5f0e8"/>
+      <rect x="0" y="0" width="3" height="160" fill="#b83232"/>
+      <text x="12" y="36" font-family="Georgia" font-size="9" fill="#1a1410">The</text>
+      <text x="12" y="50" font-family="Georgia" font-size="9" fill="#1a1410">Forgotten</text>
+      <text x="12" y="64" font-family="Georgia" font-size="9" fill="#1a1410">Shore</text>
+      <line x1="12" y1="73" x2="70" y2="73" stroke="#b83232" stroke-width="0.5"/>
+      <text x="12" y="84" font-family="Georgia" font-size="5.5" fill="#7a7060" letter-spacing="1">MEMOIR</text>
+    </svg>
+  </div>
+          <div>
+            <div class="pi-genre">Memoir &amp; Personal Essay</div>
+            <div class="pi-title">The Forgotten <em>Shore</em></div>
+            <div class="pi-detail" style="margin-top:6px">IngramSpark paperback &mdash; 186 pages &mdash; Wide distribution</div>
+          </div>
+        </div>
+        <div class="pi-overlay">
+          <div class="pi-open-hint">View details</div>
+          <div class="pi-ov-title">The Forgotten Shore</div>
+          <div class="pi-ov-desc">Memoir for IngramSpark wide distribution. 16-page photo insert, alternating running heads throughout.</div>
+          <div class="pi-ov-tags"><span class="pi-tag">IngramSpark</span><span class="pi-tag">Photo Insert</span><span class="pi-tag">Memoir</span></div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="pi" onclick="openModal('m5')">
+        <div class="pi-inner">
+          <div class="pi-spine"></div>
+          <div class="pi-cover" style="background:#1c1c1e">
+  <svg viewBox="0 0 140 160" style="width:120px" fill="none">
+    <rect width="140" height="160" fill="#1c1c1e"/>
+              <rect x="14" y="18" width="112" height="1" fill="rgba(184,50,50,0.55)"/>
+              <text x="14" y="52" font-family="Georgia" font-size="14" fill="#f5f5f5">LEAD</text>
+              <text x="14" y="70" font-family="Georgia" font-size="14" fill="#f5f5f5">WITH</text>
+              <text x="14" y="88" font-family="Georgia" font-size="14" fill="#b83232" font-style="italic">Purpose</text>
+              <rect x="14" y="98" width="112" height="0.75" fill="rgba(184,50,50,0.3)"/>
+              <text x="14" y="112" font-family="Georgia" font-size="5.5" fill="rgba(245,245,245,0.35)" letter-spacing="1.5">LEADERSHIP · SELF-HELP</text>
+            </svg>
+          </div>
+          <div class="pi-genre">Leadership / Self-Help</div>
+<div class="pi-title">Lead With <em>Purpose</em></div>
+<div class="pi-detail">Kindle + Print &mdash; 156 pages</div>
+        </div>
+        <div class="pi-overlay">
+          <div class="pi-open-hint">View details</div>
+          <div class="pi-ov-title">Lead With Purpose</div>
+          <div class="pi-ov-desc">Leadership nonfiction with styled pullquotes, exercise sections, and structured callout design throughout.</div>
+          <div class="pi-ov-tags"><span class="pi-tag">Pullquotes</span><span class="pi-tag">Exercises</span><span class="pi-tag">KDP</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MODALS (5x) -->
+<div class="modal-bg" id="m1" onclick="handleModalBgClick(event,'m1')">
+  <div class="modal">
+    <div class="modal-left">
+      <svg viewBox="0 0 140 200" style="width:120px" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="140" height="200" fill="#1a1410"/>
+        <rect x="0" y="0" width="140" height="3" fill="#b83232"/>
+        <text x="14" y="60" font-family="Georgia" font-size="11" fill="#e8d5a0" font-style="italic">The Silent</text>
+        <text x="14" y="78" font-family="Georgia" font-size="11" fill="#e8d5a0" font-style="italic">Garden</text>
+        <line x1="14" y1="90" x2="76" y2="90" stroke="#b83232" stroke-width="1"/>
+        <text x="14" y="104" font-family="Georgia" font-size="5.5" fill="rgba(232,213,160,0.45)" letter-spacing="2">A NOVEL</text>
+      </svg>
+    </div>
+    <div class="modal-right">
+      <button class="modal-close-btn" onclick="closeModal('m1')">Close &times;</button>
+      <div class="modal-genre">Literary Fiction &mdash; 2024</div>
+      <div class="modal-title">The Silent Garden</div>
+      <div class="modal-subtitle">A character-driven novel of loss and memory</div>
+      <div class="modal-hr"></div>
+      <p class="modal-desc">Full print interior layout with custom chapter openings, typeset drop capitals, and carefully tuned line spacing for literary fiction. Companion EPUB with embedded fonts for Kindle and Apple Books distribution.</p>
+      <div class="modal-specs">
+        <div class="modal-spec"><span class="ms-key">Format</span><span class="ms-val">Print PDF + EPUB3</span></div>
+        <div class="modal-spec"><span class="ms-key">Trim Size</span><span class="ms-val">5.5 &times; 8.5 in</span></div>
+        <div class="modal-spec"><span class="ms-key">Pages</span><span class="ms-val">342</span></div>
+        <div class="modal-spec"><span class="ms-key">Platform</span><span class="ms-val">Amazon KDP + Kindle</span></div>
+        <div class="modal-spec"><span class="ms-key">Typeface</span><span class="ms-val">EB Garamond 11/16</span></div>
+        <div class="modal-spec"><span class="ms-key">Status</span><span class="ms-val">Live on Amazon</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="m2" onclick="handleModalBgClick(event,'m2')">
+  <div class="modal">
+    <div class="modal-left" style="background:#2c3e50">
+      <svg viewBox="0 0 140 200" style="width:120px" fill="none">
+        <rect width="140" height="200" fill="#2c3e50"/>
+        <text x="14" y="58" font-family="Georgia" font-size="12" fill="#ecf0f1" font-weight="bold">SCALING</text>
+        <text x="14" y="76" font-family="Georgia" font-size="12" fill="#ecf0f1" font-weight="bold">BEYOND</text>
+        <text x="14" y="94" font-family="Georgia" font-size="12" fill="#b83232" font-style="italic">Seven Figures</text>
+      </svg>
+    </div>
+    <div class="modal-right">
+      <button class="modal-close-btn" onclick="closeModal('m2')">Close &times;</button>
+      <div class="modal-genre">Business Nonfiction &mdash; 2024</div>
+      <div class="modal-title">Scaling Beyond Seven Figures</div>
+      <div class="modal-subtitle">A founder's guide to sustainable growth</div>
+      <div class="modal-hr"></div>
+      <p class="modal-desc">Business nonfiction with complex structural requirements: tables, sidebars, numbered frameworks, and visual callout boxes. Kindle and paperback formatted simultaneously with a consistent master style sheet.</p>
+      <div class="modal-specs">
+        <div class="modal-spec"><span class="ms-key">Format</span><span class="ms-val">Print PDF + EPUB3</span></div>
+        <div class="modal-spec"><span class="ms-key">Trim Size</span><span class="ms-val">6 &times; 9 in</span></div>
+        <div class="modal-spec"><span class="ms-key">Pages</span><span class="ms-val">218</span></div>
+        <div class="modal-spec"><span class="ms-key">Special Elements</span><span class="ms-val">Tables, callouts, frameworks</span></div>
+        <div class="modal-spec"><span class="ms-key">Platform</span><span class="ms-val">Amazon KDP</span></div>
+        <div class="modal-spec"><span class="ms-key">Status</span><span class="ms-val">Live on Amazon</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="m3" onclick="handleModalBgClick(event,'m3')">
+  <div class="modal">
+    <div class="modal-left" style="background:#0d1117">
+      <svg viewBox="0 0 140 200" style="width:120px" fill="none">
+        <rect width="140" height="200" fill="#0d1117"/>
+        <circle cx="70" cy="80" r="48" fill="none" stroke="#b83232" stroke-width="0.5" opacity="0.5"/>
+        <circle cx="70" cy="80" r="30" fill="none" stroke="#b83232" stroke-width="0.5" opacity="0.3"/>
+        <text x="70" y="150" font-family="Georgia" font-size="9" fill="#c0c0c0" text-anchor="middle">DARK ORBIT</text>
+        <text x="70" y="164" font-family="Georgia" font-size="5.5" fill="rgba(192,192,192,0.35)" text-anchor="middle" letter-spacing="1">BOOK 1 OF 3</text>
+      </svg>
+    </div>
+    <div class="modal-right">
+      <button class="modal-close-btn" onclick="closeModal('m3')">Close &times;</button>
+      <div class="modal-genre">Science Fiction Series &mdash; 2023</div>
+      <div class="modal-title">Dark Orbit</div>
+      <div class="modal-subtitle">Three-volume science fiction series</div>
+      <div class="modal-hr"></div>
+      <p class="modal-desc">Three-book sci-fi series formatted with a unified typographic identity across all volumes. Master style sheet ensured complete visual consistency. Each volume formatted for both print and digital distribution simultaneously.</p>
+      <div class="modal-specs">
+        <div class="modal-spec"><span class="ms-key">Format</span><span class="ms-val">Print + EPUB (&times;3)</span></div>
+        <div class="modal-spec"><span class="ms-key">Volumes</span><span class="ms-val">3 books, ~890 total pages</span></div>
+        <div class="modal-spec"><span class="ms-key">Platform</span><span class="ms-val">KDP + Apple Books</span></div>
+        <div class="modal-spec"><span class="ms-key">Special</span><span class="ms-val">Series-wide style sheet</span></div>
+        <div class="modal-spec"><span class="ms-key">Status</span><span class="ms-val">All three volumes live</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="m4" onclick="handleModalBgClick(event,'m4')">
+  <div class="modal">
+    <div class="modal-left" style="background:var(--fog)">
+      <svg viewBox="0 0 100 160" style="width:90px" fill="none">
+        <rect width="100" height="160" fill="#f5f0e8"/>
+        <rect x="0" y="0" width="3" height="160" fill="#b83232"/>
+        <text x="12" y="36" font-family="Georgia" font-size="9" fill="#1a1410">The</text>
+        <text x="12" y="50" font-family="Georgia" font-size="9" fill="#1a1410">Forgotten</text>
+        <text x="12" y="64" font-family="Georgia" font-size="9" fill="#1a1410">Shore</text>
+        <line x1="12" y1="73" x2="70" y2="73" stroke="#b83232" stroke-width="0.5"/>
+        <text x="12" y="84" font-family="Georgia" font-size="5.5" fill="#7a7060" letter-spacing="1">MEMOIR</text>
+      </svg>
+    </div>
+    <div class="modal-right">
+      <button class="modal-close-btn" onclick="closeModal('m4')">Close &times;</button>
+      <div class="modal-genre">Memoir &mdash; 2024</div>
+      <div class="modal-title">The Forgotten Shore</div>
+      <div class="modal-subtitle">A memoir of displacement and return</div>
+      <div class="modal-hr"></div>
+      <p class="modal-desc">Personal memoir formatted for IngramSpark's wide distribution network. Includes a 16-page photo insert section with correct bleed and image placement. Running heads carry author name and chapter title alternately.</p>
+      <div class="modal-specs">
+        <div class="modal-spec"><span class="ms-key">Format</span><span class="ms-val">Print PDF (IngramSpark)</span></div>
+        <div class="modal-spec"><span class="ms-key">Trim</span><span class="ms-val">5.5 &times; 8.5 in</span></div>
+        <div class="modal-spec"><span class="ms-key">Pages</span><span class="ms-val">186 + 16pp photo insert</span></div>
+        <div class="modal-spec"><span class="ms-key">Distribution</span><span class="ms-val">Wide (global bookstores)</span></div>
+        <div class="modal-spec"><span class="ms-key">Status</span><span class="ms-val">Live &mdash; wide distribution</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="m5" onclick="handleModalBgClick(event,'m5')">
+  <div class="modal">
+    <div class="modal-left" style="background:#1c1c1e">
+      <svg viewBox="0 0 140 200" style="width:120px" fill="none">
+        <rect width="140" height="200" fill="#1c1c1e"/>
+        <rect x="14" y="20" width="112" height="1" fill="rgba(184,50,50,0.55)"/>
+        <text x="14" y="64" font-family="Georgia" font-size="15" fill="#f5f5f5">LEAD</text>
+        <text x="14" y="84" font-family="Georgia" font-size="15" fill="#f5f5f5">WITH</text>
+        <text x="14" y="104" font-family="Georgia" font-size="15" fill="#b83232" font-style="italic">Purpose</text>
+        <rect x="14" y="116" width="112" height="0.75" fill="rgba(184,50,50,0.3)"/>
+      </svg>
+    </div>
+    <div class="modal-right">
+      <button class="modal-close-btn" onclick="closeModal('m5')">Close &times;</button>
+      <div class="modal-genre">Leadership / Self-Help &mdash; 2024</div>
+      <div class="modal-title">Lead With Purpose</div>
+      <div class="modal-subtitle">A practical guide for modern leaders</div>
+      <div class="modal-hr"></div>
+      <p class="modal-desc">Self-help nonfiction requiring bespoke typographic design for pullquotes, exercise sections, and key frameworks. Both Kindle and print formatted with mirrored visual logic between formats.</p>
+      <div class="modal-specs">
+        <div class="modal-spec"><span class="ms-key">Format</span><span class="ms-val">Print PDF + EPUB3</span></div>
+        <div class="modal-spec"><span class="ms-key">Pages</span><span class="ms-val">156</span></div>
+        <div class="modal-spec"><span class="ms-key">Special Elements</span><span class="ms-val">Pullquotes, exercises</span></div>
+        <div class="modal-spec"><span class="ms-key">Platform</span><span class="ms-val">Amazon KDP</span></div>
+        <div class="modal-spec"><span class="ms-key">Status</span><span class="ms-val">Live on Amazon</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section class="section section--paper" id="process">
+  <div class="wrap">
+    <div class="s-index" data-n="05">Process</div>
+    <h2 class="s-title">How the work <em>actually happens</em></h2>
+    <div class="process-layout">
+      <div class="process-side">
+        <div class="process-side-label">From manuscript to market</div>
+      </div>
+      <div class="process-list">
+        <div class="ps">
+          <div class="ps-num">01</div>
+          <div class="ps-body">
+            <div class="ps-title">You send the manuscript</div>
+            <p class="ps-desc">Share your Word document, Google Doc, or any text file. Include style preferences — or let me make the decisions. I review the full document before work begins.</p>
+            <div class="ps-chips"><span class="chip">Word .docx</span><span class="chip">Google Docs</span><span class="chip">Any format</span></div>
+          </div>
+        </div>
+        <div class="ps">
+          <div class="ps-num">02</div>
+          <div class="ps-body">
+            <div class="ps-title">I build the style sheet</div>
+            <p class="ps-desc">Before touching a single character, I establish the typographic system: typeface selection, type size, leading, margin ratios, chapter opening design, and hierarchy. This is where the book's visual identity is created.</p>
+            <div class="ps-chips"><span class="chip">Typography</span><span class="chip">Margin ratios</span><span class="chip">Chapter design</span></div>
+          </div>
+        </div>
+        <div class="ps">
+          <div class="ps-num">03</div>
+          <div class="ps-body">
+            <div class="ps-title">Formatting &amp; typesetting</div>
+            <p class="ps-desc">The manuscript is flowed into the layout. Every widow and orphan is corrected. Hyphenation is checked. Images are placed correctly. Running heads are consistent. Page numbers fall where they should. I don't rush this.</p>
+            <div class="ps-chips"><span class="chip">Widow/orphan control</span><span class="chip">Hyphenation</span><span class="chip">Image placement</span></div>
+          </div>
+        </div>
+        <div class="ps">
+          <div class="ps-num">04</div>
+          <div class="ps-body">
+            <div class="ps-title">You review. We refine.</div>
+            <p class="ps-desc">You receive a full PDF proof and, if applicable, an EPUB preview. Revisions are included until you're satisfied. I don't count revisions — if something isn't right, we fix it.</p>
+            <div class="ps-chips"><span class="chip">PDF proof</span><span class="chip">EPUB preview</span><span class="chip">Unlimited revisions</span></div>
+          </div>
+        </div>
+        <div class="ps" style="border-bottom:none">
+          <div class="ps-num">05</div>
+          <div class="ps-body">
+            <div class="ps-title">Delivery &amp; upload support</div>
+            <p class="ps-desc">You receive all files: print-ready PDF, EPUB3, and source files if requested. If you need help uploading to KDP or IngramSpark, I'm available to guide you through every step.</p>
+            <div class="ps-chips"><span class="chip">Print PDF</span><span class="chip">EPUB3</span><span class="chip">Upload support</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section section--dark" id="contact">
+  <div class="wrap">
+    <div class="contact-layout">
+
+      <div class="contact-left">
+        <div class="s-index" data-n="06" style="color:rgba(184,50,50,0.8)">Contact</div>
+        <h2 class="contact-h">Let's talk about<br>your <em>book</em></h2>
+        <p class="contact-body">Tell me about your project in three quick questions. I'll respond within a few hours with a quote and timeline.</p>
+        <div class="contact-facts">
+          <div class="cf-item"><div class="cf-label">Response time</div><div class="cf-val">Within 4 hours</div></div>
+          <div class="cf-item"><div class="cf-label">First sample</div><div class="cf-val">Free &mdash; first chapter at no charge</div></div>
+          <div class="cf-item"><div class="cf-label">Turnaround</div><div class="cf-val">24&ndash;48 hours from project start</div></div>
+          <div class="cf-item"><div class="cf-label">Revisions</div><div class="cf-val">Unlimited, included in every project</div></div>
+          <div class="cf-item"><div class="cf-label">Upwork profile</div><div class="cf-val">Top Rated &mdash; <a href="https://www.upwork.com/freelancers/~017adb30efbd580116" target="_blank" style="color:var(--red)">View profile</a></div></div>
+        </div>
+      </div>
+
+      <div class="contact-right">
+        <div class="form-prog">
+          <div class="fp active" id="fp0"></div>
+          <div class="fp" id="fp1"></div>
+          <div class="fp" id="fp2"></div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="f-step on" id="fs1">
+          <div class="f-step-lbl">Step 1 of 3 &mdash; Your Project</div>
+          <div class="f-step-q">What type of book are you formatting?</div>
+          <div class="f-options">
+            <button class="f-opt" onclick="pick(this)"><div class="f-dot"></div><div class="f-opt-text">Fiction &mdash; Novel, short stories, poetry</div></button>
+            <button class="f-opt" onclick="pick(this)"><div class="f-dot"></div><div class="f-opt-text">Nonfiction &mdash; Business, self-help, memoir</div></button>
+            <button class="f-opt" onclick="pick(this)"><div class="f-dot"></div><div class="f-opt-text">Illustrated &mdash; Children's, cookbooks, workbooks</div></button>
+            <button class="f-opt" onclick="pick(this)"><div class="f-dot"></div><div class="f-opt-text">Not sure &mdash; I'd like your recommendation</div></button>
+          </div>
+          <div class="f-actions"><div></div><button class="f-next" onclick="goStep(2)">Continue &rarr;</button></div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="f-step" id="fs2">
+          <div class="f-step-lbl">Step 2 of 3 &mdash; Format &amp; Timeline</div>
+          <div class="f-step-q">What do you need, and when?</div>
+          <div class="f-options">
+            <button class="f-opt" onclick="pick(this)"><div class="f-dot"></div><div class="f-opt-text">Kindle ebook only &mdash; EPUB / MOBI</div></button>
+            <button class="f-opt" onclick="pick(this)"><div class="f-dot"></div><div class="f-opt-text">Print interior only &mdash; PDF</div></button>
+            <button class="f-opt" onclick="pick(this)"><div class="f-dot"></div><div class="f-opt-text">Both Kindle and print</div></button>
+            <button class="f-opt" onclick="pick(this)"><div class="f-dot"></div><div class="f-opt-text">Rush delivery &mdash; I need this within 24 hours</div></button>
+          </div>
+          <div class="f-actions"><button class="f-back" onclick="goStep(1)">&larr; Back</button><button class="f-next" onclick="goStep(3)">Continue &rarr;</button></div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="f-step" id="fs3">
+          <div class="f-step-lbl">Step 3 of 3 &mdash; Your Details</div>
+          <div class="f-step-q">Almost done &mdash; just a few details.</div>
+          <div class="f-field"><label>Your name</label><input type="text" id="fname" placeholder="Jane Smith"/></div>
+          <div class="f-field"><label>Email address</label><input type="email" id="femail" placeholder="jane@example.com"/></div>
+          <div class="f-field"><label>Word count &amp; any notes</label><textarea id="fnotes" placeholder="Approx. 80,000 words. Has 6 charts. Publishing on KDP..."></textarea></div>
+          <div class="f-actions"><button class="f-back" onclick="goStep(2)">&larr; Back</button><button class="f-next" onclick="submitForm()">Send Brief &rarr;</button></div>
+        </div>
+
+        <!-- Success -->
+        <div class="f-success" id="fsuccess">
+          <div class="fs-mark">&#10003;</div>
+          <div class="fs-title">Brief received.</div>
+          <div class="fs-sub">I'll review your project and reply within 4 hours.<br>Check your inbox — and your spam folder.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="f-logo">Mir Shahid <b>Ali</b> &mdash; Book Formatting Specialist</div>
+      <nav class="f-nav">
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="f-copy">&copy; 2025</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =====================================================
+   NAV SCROLL
+===================================================== */
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function(){
+  nav.classList.toggle('stuck', window.scrollY > 70);
+}, {passive: true});
+
+/* =====================================================
+   MODALS
+===================================================== */
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleModalBgClick(e, id) {
+  if (e.target === document.getElementById(id)) closeModal(id);
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-bg.open').forEach(function(m){
+      m.classList.remove('open');
+    });
+    document.body.style.overflow = '';
+  }
+});
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.handleModalBgClick = handleModalBgClick;
+
+/* =====================================================
+   3-STEP FORM
+===================================================== */
+function pick(btn) {
+  var opts = btn.closest('.f-options').querySelectorAll('.f-opt');
+  opts.forEach(function(o){ o.classList.remove('sel'); });
+  btn.classList.add('sel');
+}
+window.pick = pick;
+
+function goStep(n) {
+  // Validate: steps 1+2 need a selection
+  if (n > 1) {
+    var prev = document.getElementById('fs' + (n-1));
+    var sel = prev ? prev.querySelector('.f-opt.sel') : null;
+    if (prev && prev.querySelector('.f-options') && !sel) {
+      shake(prev); return;
+    }
+  }
+  // Hide all steps
+  [1,2,3].forEach(function(i){
+    var el = document.getElementById('fs'+i);
+    if (el) el.classList.remove('on');
+  });
+  var target = document.getElementById('fs'+n);
+  if (target) target.classList.add('on');
+  // Progress dots
+  ['fp0','fp1','fp2'].forEach(function(id, i){
+    var dot = document.getElementById(id);
+    if (!dot) return;
+    dot.classList.remove('done','active');
+    if (i < n-1) dot.classList.add('done');
+    else if (i === n-1) dot.classList.add('active');
+  });
+}
+window.goStep = goStep;
+
+function submitForm() {
+  var name = document.getElementById('fname').value.trim();
+  var email = document.getElementById('femail').value.trim();
+  if (!name || !email) { shake(document.getElementById('fs3')); return; }
+  [1,2,3].forEach(function(i){
+    var el = document.getElementById('fs'+i);
+    if (el) el.classList.remove('on');
+  });
+  document.querySelector('.form-prog').style.opacity = '0';
+  var succ = document.getElementById('fsuccess');
+  succ.classList.add('show');
+  ['fp0','fp1','fp2'].forEach(function(id){
+    var dot = document.getElementById(id);
+    if (dot) dot.classList.add('done');
+  });
+}
+window.submitForm = submitForm;
+
+function shake(el) {
+  if (!el) return;
+  el.animate(
+    [{transform:'translateX(0)'},{transform:'translateX(-7px)'},
+     {transform:'translateX(7px)'},{transform:'translateX(-3px)'},
+     {transform:'translateX(0)'}],
+    {duration: 300, easing: 'ease'}
+  );
+}
+</script>
+</body>
+</html>
