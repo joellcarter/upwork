@@ -164,11 +164,16 @@ ul{list-style:none}
   border-bottom:1px solid var(--rule);
 }
 .hero-left{
-  padding:60px 60px 80px 56px;
+  padding:30px 60px 80px 56px;
   border-right:1px solid var(--rule);
   display:flex;
   flex-direction:column;
-  justify-content:space-between;
+  justify-content: flex-start;
+}
+.hero-last-line{
+  display:inline-block;
+  position:relative;
+  top:-70px;
 }
 .hero-eyebrow{
   font-family:var(--cond);
@@ -189,7 +194,7 @@ ul{list-style:none}
   font-weight:900;
   line-height:1.05;
   letter-spacing:-0.025em;
-  margin-bottom:36px;
+  margin-bottom:20px;
 }
 .hero-h1 em{
   font-style:italic;
@@ -208,6 +213,7 @@ ul{list-style:none}
   border-left:2px solid var(--fog);
   padding-left:18px;
   margin-bottom:52px;
+  margin-top:-60px;
 }
 .hero-btns{display:flex;align-items:center;gap:28px}
 .btn-solid{
@@ -1202,7 +1208,7 @@ ul{list-style:none}
           <h1 class="hero-h1 anim-2">
             Your words,<br>
             <em>perfectly</em><br>
-            set in type.
+            <span class="hero-last-line">set in type.</span>
           </h1>
           <p class="hero-sub anim-3">
             Professional Kindle, KDP, EPUB &amp; print interior
